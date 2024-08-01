@@ -55,7 +55,7 @@ const SignUp = () => {
 
   return (
     <div
-      className="flex flex-col gap-y-4 bg-gradient-to-br dark:from-slate-800 to-slate-950
+      className="flex flex-col gap-y-4 bg-gradient-to-br dark:from-slate-800 to-slate-950 rounded-lg p-4
     "
     >
       <h2 className="text-3xl text-center">Sign Up</h2>
