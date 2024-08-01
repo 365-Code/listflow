@@ -10,14 +10,14 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 const PORT = 3000;
-app.use(cookieParser());
-app.use(express.json());
 app.use(
   cors({
     origin: true,
     credentials: true,
   })
 );
+app.use(cookieParser());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Server is listening");
