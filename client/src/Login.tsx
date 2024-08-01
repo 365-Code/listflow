@@ -56,35 +56,38 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col gap-y-4 bg-gradient-to-br from-slate-400 to-slate-500 dark:from-slate-800 dark:to-slate-950 p-4 rounded-lg">
-      <h2 className="text-3xl text-center">Login</h2>
+    <div className="flex flex-col gap-y-4 backdrop-blur-md bg-gradient-to-br from-slate-400 to-slate-500 dark:from-slate-900 py-8 dark:to-slate-950 p-4 rounded-lg w-[400px] max-w-full dark:text-slate-300">
+      <h2 className="text-3xl text-center dark:text-slate-300">Login</h2>
       <form onSubmit={handleSubmit}>
-        <div className="border rounded-lg overflow-hidden max-w-full w-[320px] mb-2">
+        <div className="border-b focus-within:border-blue-500 transition-all overflow-hidden max-w-full mb-2 w-full">
           <input
             value={auth.username}
             onChange={handleChange}
             type="text"
             name="username"
             placeholder="Username"
-            className="w-full p-2 outline-none border-none"
+            className="w-full p-2 outline-none border-none dark:text-slate-300 text-slate-900 bg-transparent"
           />
         </div>
-        <div className="border rounded-lg overflow-hidden max-w-full w-[320px] mb-2">
+        <div className="border-b focus-within:border-blue-500 transition-all overflow-hidden max-w-full mb-2 w-full">
           <input
             value={auth.password}
             onChange={handleChange}
-            type="text"
+            type="password"
             name="password"
             placeholder="Password"
-            className="w-full p-2 outline-none border-none"
+            className="w-full p-2 outline-none border-none dark:text-slate-300 text-slate-900 bg-transparent"
           />
         </div>
 
-        <Link to={"/sign-up"} className="text-sm">
+        <Link to={"/sign-up"} className="text-sm underline hover:text-purple-400 transition-all">
           Not Registered?
         </Link>
-        <div>
-          <button type="submit" className="rounded-lg p-2">
+        <div className="w-[80%] mx-auto mt-4">
+          <button
+            type="submit"
+            className="rounded-lg p-2 bg-blue-500 hover:bg-blue-600 w-full mx-auto"
+          >
             Sign In
           </button>
         </div>
