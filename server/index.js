@@ -19,17 +19,16 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/user/todo", todoRoute);
 app.get("/", (req, res) => {
   res.send("Server is listening");
 });
-
 app.get("/test", (req, res) => {
   res.send({
     msg: "This is a test route",
   });
 });
-app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/user/todo", todoRoute);
 
 connectDB()
   .then(() => {
