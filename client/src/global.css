@@ -22,6 +22,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  transition: all;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -29,7 +30,13 @@ body {
 }
 
 .listItem {
-  @apply dark:hover:bg-slate-600 hover:bg-slate-200;
+  @apply dark:hover:bg-slate-600 dark:text-slate-300 
+        hover:bg-slate-400 hover:to-slate-700 text-slate-950;
+}
+
+.active-list-item {
+  @apply dark:bg-slate-700 dark:text-slate-300 
+        bg-slate-400 text-slate-950 font-medium;
 }
 
 .incomplete-task {
@@ -40,10 +47,6 @@ body {
   @apply scale-50;
 }
 
-.active-list-item {
-  @apply dark:bg-slate-800 bg-slate-200;
-}
-
 .task-completed {
-  @apply line-through text-slate-500;
+  @apply line-through dark:text-slate-500 text-slate-700;
 }

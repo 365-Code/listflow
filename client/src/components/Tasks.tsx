@@ -38,9 +38,9 @@ const Tasks = ({ tasks, type }: TasksProps) => {
           toggle ? "h-full" : "h-0 overflow-hidden"
         } transition-all `}
       >
-        {tasks?.map((task, i) => (
-          <TodoItem key={i} item={task} />
-        ))}
+        {tasks?.map(
+          (task, i) => task.status == type && <TodoItem key={i} item={task} />
+        )}
       </div>
     </div>
   );

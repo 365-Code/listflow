@@ -19,6 +19,26 @@ export const getAllTodos = async (label: string) => {
   }
 };
 
+export const addToDo = async (label: string, content: string) => {
+  try {
+    const response = await fetch(`${api_url}/api/v1/user/todo`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: authToken,
+      },
+      body: JSON.stringify({
+        label,
+        content,
+      }),
+    });
+
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 type UpdateTodoType = {
   content?: string;
   status?: string;
@@ -49,6 +69,22 @@ export const deleteToDo = async (todoId: string) => {
       `${api_url}/api/v1/user/todo?todoId=` + todoId,
       {
         method: "DELETE",
+        headers: {
+          authorization: authToken,
+        },
+      }
+    );
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const searchToDos = async (query: string) => {
+  try {
+    const response = await fetch(
+      `${api_url}/api/v1/user/todo/search?query=` + query,
+      {
         headers: {
           authorization: authToken,
         },

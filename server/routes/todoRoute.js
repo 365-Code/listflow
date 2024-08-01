@@ -18,7 +18,6 @@ route.post("/", verifyToken, async (req, res) => {
     }
 
     const { content, label } = body;
-    console.log(body);
     if (!content || !label) {
       return res.status(404).send({
         msg: "Enter valid content or label",
@@ -28,7 +27,7 @@ route.post("/", verifyToken, async (req, res) => {
 
     const newTodo = await todoModel.create({
       content,
-      label,
+      label: label.toLowerCase(),
       userId: user.id,
     });
 
@@ -40,6 +39,36 @@ route.post("/", verifyToken, async (req, res) => {
     return res.status(500).send({
       success: false,
       error: error.message,
+    });
+  }
+});
+
+route.get("/search", verifyToken, async (req, res) => {
+  try {
+    const query = req.query.query;
+    if (!query) {
+      return res.status(400).send({
+        success: false,
+        results: [],
+      });
+    }
+
+    const todos = await todoModel
+      .find({
+        userId: req.id,
+        content: { $regex: query + "", $options: "i" },
+      })
+      .select(["content", "label", "status", "_id"]);
+
+    return res.status(200).send({
+      success: true,
+      results: todos,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      msg: "Internal Server Error",
     });
   }
 });
@@ -147,6 +176,5 @@ route.delete("/", verifyToken, async (req, res) => {
     });
   }
 });
-
 
 export default route;

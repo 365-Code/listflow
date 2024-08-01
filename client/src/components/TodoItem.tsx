@@ -40,7 +40,7 @@ const TodoItem = ({ item }: { item: TodoType }) => {
   useEffect(() => {
     const debounce = setTimeout(() => {
       handleComplete();
-    }, 500);
+    }, 300);
     return () => clearTimeout(debounce);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [complete]);
@@ -82,7 +82,7 @@ const TodoItem = ({ item }: { item: TodoType }) => {
       >
         <button
           onClick={() => {
-            setComplete(!complete);
+            setComplete((prev) => !prev);
             if (!complete) {
               const audio = new Audio(notify);
               if (!audio) return;
@@ -114,7 +114,7 @@ const TodoItem = ({ item }: { item: TodoType }) => {
           <button type="button" className="hidden" />
         </form>
       )}
-      {!complete && (
+      {item.status == "pending" && (
         <div className="flex gap-x-2 items-center w-fit justify-self-start">
           <button
             onClick={() => setEdit(!edit)}
