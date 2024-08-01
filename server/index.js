@@ -23,13 +23,13 @@ app.get("/", (req, res) => {
   res.send("Server is listening");
 });
 
-app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/user/todo", todoRoute);
 app.get("/test", (req, res) => {
-  res.json({
+  res.send({
     msg: "This is a test route",
   });
 });
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/user/todo", todoRoute);
 
 connectDB()
   .then(() => {
