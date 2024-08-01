@@ -17,6 +17,11 @@ app.use(cors({
   origin: "http://localhost:5173",
   credentials: true
 }));
+
+app.get("/", (req, res) => {
+  res.send("Server is listening")
+})
+
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user/todo", todoRoute);
 
