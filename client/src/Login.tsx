@@ -80,7 +80,10 @@ const Login = () => {
           />
         </div>
 
-        <Link to={"/sign-up"} className="text-sm underline hover:text-purple-400 transition-all">
+        <Link
+          to={"/sign-up"}
+          className="text-sm underline hover:text-purple-400 transition-all"
+        >
           Not Registered?
         </Link>
         <div className="w-[80%] mx-auto mt-4">
