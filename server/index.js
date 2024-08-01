@@ -13,17 +13,24 @@ const HOST = "localhost";
 const PORT = 3000;
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({
-  origin: "https://listflow.vercel.app",
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: "https://listflow.vercel.app",
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
-  res.send("Server is listening")
-})
+  res.send("Server is listening");
+});
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user/todo", todoRoute);
+app.use("/test", (req, res) => {
+  res.json({
+    msg: "This is a test route",
+  });
+});
 
 connectDB()
   .then(() => {
@@ -36,4 +43,4 @@ connectDB()
     console.error("Failed to connect to MongoDB", err);
   });
 
-module.exports = app
+module.exports = app;
