@@ -9,13 +9,12 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
-const HOST = "localhost";
 const PORT = 3000;
 app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://listflow.vercel.app",
+    origin: "https://listflow.vercel.app/",
     credentials: true,
   })
 );
@@ -26,7 +25,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user/todo", todoRoute);
-app.use("/test", (req, res) => {
+app.get("/test", (req, res) => {
   res.json({
     msg: "This is a test route",
   });
