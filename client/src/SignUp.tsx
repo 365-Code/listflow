@@ -54,7 +54,10 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex flex-col gap-y-4">
+    <div
+      className="flex flex-col gap-y-4 bg-gradient-to-br dark:from-slate-800 to-slate-950
+    "
+    >
       <h2 className="text-3xl text-center">Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="border rounded-lg overflow-hidden max-w-full w-[320px] mb-2">

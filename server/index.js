@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://listflow.vercel.app/",
+    origin: true,
     credentials: true,
   })
 );
@@ -41,3 +41,5 @@ connectDB()
   .catch((err) => {
     console.error("Failed to connect to MongoDB", err);
   });
+
+module.exports = app;
