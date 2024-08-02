@@ -6,6 +6,7 @@ import authRoute from "./routes/authRoute.js";
 import todoRoute from "./routes/todoRoute.js";
 import connectDB from "./db.js";
 import cookieParser from "cookie-parser";
+import userRoute from "./routes/userRoute.js";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/user/label", userRoute);
 app.use("/api/v1/user/todo", todoRoute);
 app.get("/", (req, res) => {
   res.send("Server is listening");

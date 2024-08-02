@@ -20,6 +20,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     navigate("/");
   };
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     if (user) {
       navigate("/");

@@ -11,8 +11,8 @@ route.post("/", verifyToken, async (req, res) => {
     const user = await userModel.findById(req.id);
 
     if (!user) {
-      return res.status(403).send({
-        msg: "UnAuthorized Access",
+      return res.status(404).send({
+        msg: "User not found",
         success: false,
       });
     }

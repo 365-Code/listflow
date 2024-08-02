@@ -11,9 +11,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { Bounce, ToastContainer } from "react-toastify";
 import { AuthProvider } from "./hooks/useAuth";
 import LogOutButton from "./components/LogOutButton";
-import { CookiesProvider } from "react-cookie";
 
 function App() {
+
   return (
     <main
       className="h-screen overflow-hidden w-full flex flex-col justify-center items-center

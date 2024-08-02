@@ -16,6 +16,10 @@
       "dest": "/index.js"
     },
     {
+      "src": "/api/v1/user/label/(.*)",
+      "dest": "/index.js"
+    },
+    {
       "src": "/test",
       "dest": "/index.js"
     },

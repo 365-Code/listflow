@@ -22,7 +22,7 @@ route.post("/login", async (req, res) => {
     if (!user) {
       return res.status(404).send({
         success: false,
-        msg: "Enter a valid username or password",
+        msg: "",
       });
     }
 
@@ -88,6 +88,19 @@ route.post("/register", async (req, res) => {
     return res.status(500).send({
       success: false,
       error: error.message,
+    });
+  }
+});
+
+route.get("/get-cookie", (req, res) => {
+  try {
+    const cookie = req.cookies["auth-token"];
+    res.send({
+      token: cookie,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      msg: "Internal Server Error",
     });
   }
 });
