@@ -8,11 +8,16 @@ import {
 } from "lucide-react";
 import ListItem from "./ListItem";
 import { useDispatch, useSelector } from "react-redux";
-import { changeLabelRedux, setToDosRedux } from "../redux/todoReducer";
+import {
+  changeLabelRedux,
+  setCustomLabelsRedux,
+  setToDosRedux,
+} from "../redux/todoReducer";
 import { useEffect, useState } from "react";
 import { RootState } from "../redux/store";
-import { getAllTodos } from "../lib/todos";
+import { fetchUserLabels, getAllTodos } from "../lib/todos";
 import SearchBar from "./SearchBar";
+import AddLabel from "./AddLabel";
 
 const mainList = [
   {
@@ -38,6 +43,10 @@ const mainList = [
 const SideBar = () => {
   const currLabel = useSelector((state: RootState) => state.todos.label);
   const dispatch = useDispatch();
+
+  const customUserLabels = useSelector(
+    (state: RootState) => state.todos.customLabels
+  );
 
   const handleLabel = (label: string) => {
     dispatch(changeLabelRedux(label));
@@ -79,7 +88,52 @@ const SideBar = () => {
     return () => clearTimeout(debounce);
   }, [currLabel]);
 
+  const fetchLabels = async () => {
+    try {
+      const result = await fetchUserLabels();
+      if (result.success) {
+        dispatch(setCustomLabelsRedux(result.labels));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLabels();
+  }, []);
+
   const [showSide, setShowSide] = useState(false);
+
+  const customList = [
+    {
+      title: "DSA",
+    },
+    {
+      title: "Work",
+    },
+    {
+      title: "Home",
+    },
+    {
+      title: "Favourite",
+    },
+    {
+      title: "Imp",
+    },
+    {
+      title: "College",
+    },
+    {
+      title: "Office",
+    },
+    {
+      title: "Tasks",
+    },
+    {
+      title: "School",
+    },
+  ];
 
   return (
     <>
@@ -94,13 +148,6 @@ const SideBar = () => {
       <div
         id="sidebar"
         className={`
-          absolute top-0 left-0 z-10 bg-slate-900 w-[90%] h-full
-          sm:z-auto sm:top-auto sm:left-auto sm:relative 
-          dark:bg-gradient-to-br dark:from-slate-800/70 dark:to-slate-950/80 dark:text-slate-300 
-          bg-gradient-to-br from-slate-600/80 to-slate-600 text-slate-950 
-          sm:w-[250px] sm:translate-x-0 
-          lg:w-[250px] 
-          px-2 py-4 transition-all 
           ${showSide ? "translate-x-0" : "-translate-x-full"}`}
       >
         <button
@@ -110,17 +157,33 @@ const SideBar = () => {
           <SidebarCloseIcon className="w-[2rem] h-[2rem]" />
         </button>
         <SearchBar />
-        <div className="main-list">
-          {mainList.map((li, i) => (
-            <ListItem
-              key={i}
-              item={li}
-              handleClick={() => handleLabel(li.title)}
-            />
-          ))}
+        <div className="flex-1 flex flex-col overflow-y-hidden">
+          <div className="main-list">
+            {mainList.map((li, i) => (
+              <ListItem
+                key={i}
+                item={li}
+                handleClick={() => handleLabel(li.title)}
+              />
+            ))}
+          </div>
+          <hr className="my-4 max-w-[90%] mx-auto w-full" />
+          <div className="custom-list flex-1 overflow-y-scroll no-scrollbar">
+            {customUserLabels.length > 0 &&
+              customUserLabels.map((li, i) => (
+                <ListItem
+                  key={i}
+                  type="custom"
+                  item={{ title: li }}
+                  handleClick={() => handleLabel(li)}
+                />
+              ))}
+          </div>
+          {customList.length < 0 && (
+            <hr className="my-4 max-w-[90%] mx-auto w-full" />
+          )}
+          <AddLabel />
         </div>
-        <hr className="my-4 max-w-[90%] mx-auto" />
-        <div className="custom-list"></div>
       </div>
     </>
   );

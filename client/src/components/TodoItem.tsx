@@ -71,7 +71,7 @@ const TodoItem = ({ item }: { item: TodoType }) => {
 
   return (
     <div
-      className={`w-full mb-2 p-3 rounded-sm flex items-center gap-x-2 ${
+      className={`w-full group/todoItem mb-2 p-3 rounded-sm flex items-center gap-x-2 ${
         item.status == "completed" ? "bg-transparent" : "bg-gray-600"
       }`}
     >
@@ -115,18 +115,24 @@ const TodoItem = ({ item }: { item: TodoType }) => {
         </form>
       )}
       {item.status == "pending" && (
-        <div className="flex gap-x-2 items-center w-fit justify-self-start">
-          <button
-            onClick={() => setEdit(!edit)}
-            className="hover:-translate-y-[2px] hover:scale-110 translate-y-0 transition-all"
-          >
-            <Edit2 className="h-[1.2rem] w-[1.2rem]" color="#3b82f6" />
+        <div className="group-hover/todoItem:visible invisible flex gap-x-2 items-center w-fit justify-self-start">
+          <button onClick={() => setEdit(!edit)} className="transition-all">
+            <Edit2
+              color="#3b82f6"
+              className="w-[1.2rem] hover:stroke-blue-600 h-[1.2rem] hover:scale-110 transition-all
+                hover:-translate-y-1
+              "
+            />
           </button>
           <button
             onClick={handleDelete}
             className="hover:-translate-y-[2px]  hover:scale-110 translate-y-0 transition-all"
           >
-            <Trash2 className="h-[1.2rem] w-[1.2rem]" color="#ef4444" />
+            <Trash2
+              color="#ef4444"
+              className="w-[1.2rem] hover:stroke-red-600 h-[1.2rem] hover:scale-110 
+                hover:-translate-y-1 transition-all"
+            />
           </button>
         </div>
       )}

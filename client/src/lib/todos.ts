@@ -96,6 +96,75 @@ export const searchToDos = async (query: string) => {
   }
 };
 
+export const fetchUserLabels = async () => {
+  try {
+    const response = await fetch(`${api_url}/api/v1/user/label`, {
+      headers: {
+        authorization: authToken,
+      },
+    });
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addCustomLabel = async (label: string) => {
+  try {
+    const response = await fetch(`${api_url}/api/v1/user/label`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: authToken,
+      },
+      body: JSON.stringify({
+        label,
+      }),
+    });
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateCustomLabel = async (labelId: string, newLabel: string) => {
+  try {
+    const response = await fetch(
+      `${api_url}/api/v1/user/label?labelId=` + labelId,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: authToken,
+        },
+        body: JSON.stringify({
+          newLabel,
+        }),
+      }
+    );
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteCustomLabel = async (labelId: string) => {
+  try {
+    const response = await fetch(
+      `${api_url}/api/v1/user/label?labelId=` + labelId,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: authToken,
+        },
+      }
+    );
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // export const getAllTodos = async () => {
 //   try {
 //     const response = await fetch(`${api_url}/get-all`);

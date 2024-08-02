@@ -5,6 +5,7 @@ const initialState = {
   tasks: [] as TodoType[],
   label: "today",
   user: "",
+  customLabels: [] as string[],
 };
 
 export const todoSlice = createSlice({
@@ -13,6 +14,30 @@ export const todoSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<string>) => {
       state.user = action.payload;
+    },
+    setCustomLabelsRedux: (state, action: PayloadAction<string[]>) => {
+      state.customLabels = action.payload;
+    },
+    addCustomLabelRedux: (state, action: PayloadAction<string>) => {
+      state.customLabels.push(action.payload);
+    },
+    updateCustomLabelRedux: (
+      state,
+      action: PayloadAction<{ labelId: string; newLabel: string }>
+    ) => {
+      const labelId = action.payload.labelId.toLowerCase();
+      const newLabel = action.payload.newLabel.toLowerCase();
+      const index = state.customLabels.findIndex((i) => i == labelId);
+      if (index != -1) {
+        state.customLabels[index] = newLabel;
+      }
+    },
+    deleteCustomLabelRedux: (
+      state,
+      action: PayloadAction<{ labelId: string }>
+    ) => {
+      const labelId = action.payload.labelId.toLowerCase();
+      state.customLabels = state.customLabels.filter((lbl) => lbl != labelId);
     },
     changeLabelRedux: (state, action: PayloadAction<string>) => {
       state.label = action.payload;
@@ -54,13 +79,20 @@ export const todoSlice = createSlice({
 });
 
 export const {
-  addToDoRedux,
-  deleteToDoRedux,
-  updateToDoRedux,
-  changeToDoStatusRedux,
+  setUser,
+
   setToDosRedux,
+  addToDoRedux,
+  updateToDoRedux,
+  deleteToDoRedux,
+
+  changeToDoStatusRedux,
   changeLabelRedux,
-  setUser
+
+  setCustomLabelsRedux,
+  addCustomLabelRedux,
+  updateCustomLabelRedux,
+  deleteCustomLabelRedux,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;

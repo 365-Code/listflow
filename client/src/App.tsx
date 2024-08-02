@@ -8,9 +8,10 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import PrivateRoute from "./PrivateRoute";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
+import { Bounce, ToastContainer } from "react-toastify";
 import { AuthProvider } from "./hooks/useAuth";
 import LogOutButton from "./components/LogOutButton";
+import { CookiesProvider } from "react-cookie";
 
 function App() {
   return (
@@ -33,7 +34,20 @@ function App() {
           <ThemeToggle />
         </AuthProvider>
       </Provider>
-      <ToastContainer />
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Bounce}
+      />
     </main>
   );
 }

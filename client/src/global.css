@@ -25,6 +25,17 @@ body {
   transition: all;
 }
 
+#sidebar{
+  @apply absolute top-0 left-0 z-10 bg-slate-900 w-[90%] h-full
+  sm:z-auto sm:top-auto sm:left-auto sm:relative 
+  dark:bg-gradient-to-br dark:from-slate-800/70 dark:to-slate-950/80 dark:text-slate-300 
+  bg-gradient-to-br from-slate-600/80 to-slate-600 text-slate-950 
+  sm:w-[250px] sm:translate-x-0 
+  lg:w-[250px] 
+  px-2 py-4 transition-all 
+  flex flex-col;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   @apply hidden;
 }
