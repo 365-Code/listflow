@@ -21,6 +21,9 @@ const TodoItem = ({ item }: { item: TodoType }) => {
   const [edit, setEdit] = useState(false);
   const [content, setContent] = useState(item.content);
 
+  const [del, setDel] = useState(false);
+  const [edited, setEdited] = useState(false);
+
   const handleComplete = async () => {
     try {
       await updateTodo(item._id, {
@@ -48,6 +51,7 @@ const TodoItem = ({ item }: { item: TodoType }) => {
   const handleEdit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!content) return;
+    setEdited(true);
     try {
       await updateTodo(item._id, {
         content: content,
@@ -57,24 +61,36 @@ const TodoItem = ({ item }: { item: TodoType }) => {
       console.log(error);
     } finally {
       setEdit(false);
+      setEdited(false);
     }
   };
 
   const handleDelete = async () => {
+    setDel(true);
     try {
       await deleteToDo(item._id);
       dispatch(deleteToDoRedux({ todoId: item._id }));
     } catch (error) {
       console.log(error);
+    } finally {
+      setDel(false);
     }
   };
 
   return (
     <div
-      className={`w-full group/todoItem mb-2 p-3 rounded-sm flex items-center gap-x-2 ${
+      className={`relative w-full group/todoItem mb-2 p-3 rounded-sm flex items-center gap-x-2 ${
         item.status == "completed" ? "bg-transparent" : "bg-gray-600"
       }`}
     >
+      <div
+        style={{
+          width: `${del || edited ? "100%" : "0"}`,
+        }}
+        className={`w-full h-full absolute ${
+          del ? "bg-red-500" : edited ? "bg-blue-500" : "bg-transparent"
+        } left-0 transition-all`}
+      />
       <div
         className={`rounded-full flex justify-center items-center w-[1.2rem] h-[1.2rem] ${
           complete ? "scale-50 p-0" : "scale-100 p-1 border"

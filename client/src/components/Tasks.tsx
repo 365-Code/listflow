@@ -16,9 +16,21 @@ const Tasks = ({ tasks, type }: TasksProps) => {
 
   return (
     <div className="mb-2">
-      {currTodos.length == 0 && type == "pending" && <h1>No Task Yet</h1>}
-      {currTodos.length > 0 && type == "completed" && (
-        <div className="w-full flex items-center gap-x-2 mb-2">
+      {currTodos.length == 0 && type == "pending" && (
+        <h1
+          className="
+      text-slate-950
+      dark:text-slate-300
+      lg:text-3xl
+      sm:text-2xl
+      text-xl text-center
+      "
+        >
+          No Task Yet
+        </h1>
+      )}
+      {tasks.length > 0 && type == "completed" && (
+        <div className="w-full flex items-center gap-x-2 mb-2 text-slate-300">
           <button
             onClick={() => setToggle(!toggle)}
             className="flex items-center"

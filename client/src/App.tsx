@@ -13,13 +13,12 @@ import { AuthProvider } from "./hooks/useAuth";
 import LogOutButton from "./components/LogOutButton";
 
 function App() {
-
   return (
     <main
       className="h-screen overflow-hidden w-full flex flex-col justify-center items-center
       bg-gradient-to-br dark:from-slate-700 dark:to-slate-800
       from-slate-400 to-slate-500
-    "
+      "
     >
       <Provider store={store}>
         <AuthProvider>
@@ -36,6 +35,7 @@ function App() {
       </Provider>
 
       <ToastContainer
+        toastClassName={"bg-black"}
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}

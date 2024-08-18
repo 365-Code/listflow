@@ -14,19 +14,18 @@ const ThemeToggle: React.FC = () => {
   return (
     <button
       onClick={() => setTheme(theme == "light" ? "dark" : "light")}
-      className="rounded-full border text-center flex justify-center items-center p-4 absolute top-2 right-4 "
+      className="rounded-full border text-center flex justify-center items-center lg:p-3 p-2 absolute top-2 right-4 hover:bg-yellow-500 hover:text-white hover:border-yellow-500 dark:hover:bg-black  dark:hover:border-black"
     >
-      <div className=" relative flex justify-center items-center">
+      <div className="relative flex justify-center items-center">
         <Sun
-          color="#ca8a04"
-          className={`h-[1.1rem] bgyellow transition-all w-[1.1rem] ${
+          className={`h-[1.1rem] transition-all w-[1.1rem] ${
             theme == "light"
               ? "rotate-0 opacity-100"
               : "dark:rotate-90 dark:opacity-0"
           }`}
         />
         <Moon
-          className={`dark:text-white absolute transition-all h-[1.1rem] w-[1.1rem] 
+          className={`dark:text-white dark:fill-slate-300 absolute transition-all h-[1.1rem] w-[1.1rem] 
           ${
             theme == "light"
               ? "-rotate-90 opacity-0"

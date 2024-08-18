@@ -26,14 +26,15 @@ route.post("/login", async (req, res) => {
       });
     }
 
-    const verified = bcrypt.compare(password, user.password);
-
+    const verified = await bcrypt.compare(password, user.password);
+    
     if (!verified) {
       return res.status(403).send({
         success: false,
         msg: "Enter a valid username or password",
       });
     }
+
     const authToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     res.cookie("auth-token", authToken, {
       httpOnly: true,
@@ -100,7 +101,7 @@ route.get("/get-cookie", (req, res) => {
     });
   } catch (error) {
     return res.status(500).send({
-      msg: "Internal Server Error",
+      error: "Internal Server Error",
     });
   }
 });

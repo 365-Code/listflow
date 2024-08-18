@@ -139,7 +139,7 @@ const SideBar = () => {
     <>
       <button
         onClick={() => setShowSide(true)}
-        className="rounded-full border text-center flex justify-center items-center p-4 absolute sm:hidden top-2 right-[9rem] z-10"
+        className="rounded-full border text-center flex justify-center items-center lg:p-3 p-2 absolute sm:hidden top-2 right-[7rem] lg:right-[9rem] z-10"
       >
         <div className="relative dark:text-white text-black flex justify-center items-center">
           <SidebarOpen className={"h-[1.1rem] transition-all w-[1.1rem]"} />

@@ -10,11 +10,17 @@ const TodoItems = () => {
     <div
       className="
       backdrop-blur-md flex-1 flex flex-col relative 
-    dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900 dark:text-slate-300 
-    bg-gradient-to-br from-slate-500 to-slate-600 text-slate-950
+    dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900  
+    bg-gradient-to-br from-slate-500 to-slate-600 
     "
     >
-      <h1 className="lg:text-4xl text-3xl px-6 py-4 font-medium mb-4 absolute bg-inherit backdrop-blur-sm w-full capitalize">
+      <h1
+        className="lg:text-4xl text-3xl px-6 py-4 font-medium mb-4 absolute
+       bg-inherit 
+       dark:text-slate-300
+       text-slate-950
+       backdrop-blur-sm w-full capitalize"
+      >
         {currTodos.label}
       </h1>
       <div className="overflow-y-scroll flex-1 no-scrollbar scroll-smooth lg:px-6 px-4 ">
@@ -22,7 +28,7 @@ const TodoItems = () => {
           {"Today"}
         </h1>
         <Tasks type="pending" tasks={currTodos.tasks} />
-        <Tasks type="completed" tasks={currTodos.tasks} />
+        <Tasks type="completed" tasks={currTodos.tasks.filter((tsk) => tsk.status == "completed")} />
         <div className="h-[50px]" />
       </div>
       <TaskInput />
